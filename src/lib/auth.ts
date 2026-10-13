@@ -11,7 +11,9 @@ if (!uri) {
   );
 }
 
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, {
+  maxPoolSize: 10,
+});
 const db = client.db("assignment007");
 
 export const auth = betterAuth({
