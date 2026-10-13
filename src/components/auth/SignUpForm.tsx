@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import SocialLogin from "./SocialLogin";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+   const router = useRouter();
 
   const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
@@ -43,6 +45,8 @@ const SignUpForm = () => {
 
       if (data) {
         toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!")
+         router.replace("/")
+         router.refresh();
       }
     } catch (error) {
       console.error(error);

@@ -3,8 +3,16 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-const client = new MongoClient(process.env.MONGODB_URI!);
-const db = client.db("mhreju1995_db_user");
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error(
+    "MONGODB_URI is missing. Check your .env.local file."
+  );
+}
+
+const client = new MongoClient(uri);
+const db = client.db("assignment007");
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
